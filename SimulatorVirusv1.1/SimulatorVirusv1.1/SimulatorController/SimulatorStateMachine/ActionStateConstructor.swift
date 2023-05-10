@@ -21,11 +21,16 @@ struct SickStateConstructior {
     
     static func perform(color:UIColor = .red,status:InfectionStatus = .sick,impulse:CGVector,human:HumanModel)->SKAction?{
      
-      SKAction.run({
-             human.name = status.title
-             human.color = color
-             human.physicsBody?.applyImpulse(impulse)
+       if human.name == InfectionStatus.health.title {
+           let action = SKAction.run({
+                human.name = status.title
+                human.color = color
+                human.physicsBody?.applyImpulse(impulse)
             })
+            return action
+        }
+        return nil
+   
     }
     
    
