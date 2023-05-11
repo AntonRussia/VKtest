@@ -52,13 +52,23 @@ struct InfectionStateConstructior {
     static func infectionLogic(healthHuman:HumanModel,sickHuman:HumanModel, impulse:CGVector)->SKAction?{
          
         if healthHuman.isHealth == true && sickHuman.isHealth == false, sickHuman.infectionCount > 0{
-            sickHuman.decrimentInfectionFactory()
-            return SickStateConstructior.perform(impulse: impulse, human: healthHuman)
+            let actionSick = SKAction.run {
+                sickHuman.decrimentInfectionFactory()
+            }
+            guard let actionInfected = SickStateConstructior.perform(impulse: impulse, human: healthHuman)
+            else {return nil}
+            
+            return SKAction.sequence([actionSick, actionInfected])
         }
         
         if healthHuman.isHealth == false && sickHuman.isHealth == true , healthHuman.infectionCount > 0{
-            healthHuman.decrimentInfectionFactory()
-            return SickStateConstructior.perform(impulse: impulse, human: sickHuman)
+           let actionSick = SKAction.run {
+                healthHuman.decrimentInfectionFactory()
+            }
+            guard let actionInfected = SickStateConstructior.perform(impulse: impulse, human: sickHuman)
+            else {return nil}
+            
+            return SKAction.sequence([actionSick, actionInfected])
         }
         return nil
     }
