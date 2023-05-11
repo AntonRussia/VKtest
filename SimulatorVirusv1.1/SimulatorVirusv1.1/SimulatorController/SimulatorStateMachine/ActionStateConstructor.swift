@@ -52,12 +52,12 @@ struct InfectionStateConstructior {
     static func infectionLogic(healthHuman:HumanModel,sickHuman:HumanModel, impulse:CGVector)->SKAction?{
          
         if healthHuman.isHealth == true && sickHuman.isHealth == false, sickHuman.infectionCount > 0{
-            healthHuman.decrimentInfectionFactory()
+            sickHuman.decrimentInfectionFactory()
             return SickStateConstructior.perform(impulse: impulse, human: healthHuman)
         }
         
         if healthHuman.isHealth == false && sickHuman.isHealth == true , healthHuman.infectionCount > 0{
-            sickHuman.decrimentInfectionFactory()
+            healthHuman.decrimentInfectionFactory()
             return SickStateConstructior.perform(impulse: impulse, human: sickHuman)
         }
         return nil
