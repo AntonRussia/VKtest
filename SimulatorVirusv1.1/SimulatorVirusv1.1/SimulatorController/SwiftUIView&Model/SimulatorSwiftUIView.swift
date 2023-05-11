@@ -44,9 +44,9 @@ struct SimulatorSwiftUIView:View {
                         .frame(height: 80)
                     
                     ZStack{
-                        RoundedRectangle(cornerRadius: 25)
+                       /* RoundedRectangle(cornerRadius: 25)
                             .fill(.ultraThickMaterial)
-                            .frame(height: 50)
+                            .frame(height: 50)*/
                         HStack{
                             
                             InfectionProgressView()
