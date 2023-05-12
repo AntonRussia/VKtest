@@ -81,7 +81,16 @@ struct GroupSizeSliderView:View {
                             config.lastProgress = config.progress
                             
                         }))
-                    )
+                    ).onAppear(perform:{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                            
+                            updateStateLogic(0.1)
+                            config.progress = 0.1
+                            config.lastProgress = 0.1
+                        })
+                       
+                        
+                    })
             }
         }
     }
